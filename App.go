@@ -1,13 +1,13 @@
 package main
 
 import (
+	"github.com/abhishek70/golang-rest-api/controller"
+	"github.com/abhishek70/golang-rest-api/repository"
+	router "github.com/abhishek70/golang-rest-api/router"
+	"github.com/abhishek70/golang-rest-api/service"
 	"log"
 	"net/http"
 	"os"
-	"rest-apis/controller"
-	"rest-apis/repository"
-	router "rest-apis/router"
-	"rest-apis/service"
 )
 
 var (

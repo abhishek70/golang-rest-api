@@ -1,35 +1,30 @@
 package repository
 
 import (
+	"github.com/abhishek70/golang-rest-api/model"
 	"log"
-	"rest-apis/model"
 )
 
 type ProductRepository interface {
-	Save(product *model.Product) (*model.Product, error)
+	//Save(product *model.Product) (*model.Product, error)
 	FindAll() ([]model.Product, error)
 }
 
-type repo struct {}
-
-var (
-	l *log.Logger
-)
+type repo struct {
+	logger *log.Logger
+}
 
 func NewProductRepository(logger *log.Logger) ProductRepository {
-	l = logger
-	return &repo{}
+	return &repo{logger: logger}
 }
 
+//func (*repo) Save(product *model.Product) (*model.Product, error)  {
+//	return product, nil
+//}
 
+func (repo *repo) FindAll() ([]model.Product, error)  {
 
-func (*repo) Save(product *model.Product) (*model.Product, error)  {
-	return product, nil
-}
-
-func (r *repo) FindAll() ([]model.Product, error)  {
-
-	l.Println("Fetching all products from database")
+	repo.logger.Println("Fetching all products from database")
 
 	var products = []model.Product{{
 		Id:   1,
