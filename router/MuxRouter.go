@@ -11,26 +11,24 @@ import (
 )
 
 type MuxRouter struct {
-
+	logger  *log.Logger
 }
 
 var (
 	muxDispatcher = mux.NewRouter()
-	l *log.Logger
 )
 
 func NewMuxRouter(logger *log.Logger) Router {
-	l = logger
-	return &MuxRouter{}
+	return &MuxRouter{logger: logger}
 }
 
 func (*MuxRouter) GET(uri string, f func(w http.ResponseWriter, r *http.Request)) {
 	muxDispatcher.HandleFunc(uri, f).Methods("GET")
 }
 
-func (*MuxRouter) SERVE(port string) {
+func (muxRouter *MuxRouter) SERVE(port string) {
 
-	l.Println("HTTP server started on port", port)
+	muxRouter.logger.Println("HTTP server started on port", port)
 
 	// Setting up the web server
 	s := &http.Server{
@@ -48,7 +46,7 @@ func (*MuxRouter) SERVE(port string) {
 		err := s.ListenAndServe()
 
 		if err != nil {
-			l.Println("Server shutting down on port ", port)
+			muxRouter.logger.Println("Server shutting down on port ", port)
 			os.Exit(1)
 		}
 	}()
@@ -60,7 +58,7 @@ func (*MuxRouter) SERVE(port string) {
 
 	// Block until a signal is received.
 	sig := <-c
-	l.Println("Receive signal:", sig)
+	muxRouter.logger.Println("Receive signal:", sig)
 
 
 	// Gracefully shutdown / wait for client request to complete
