@@ -1,26 +1,23 @@
 package service
 
 import (
-	"rest-apis/model"
-	"rest-apis/repository"
+	"github.com/abhishek70/golang-rest-api/model"
+	"github.com/abhishek70/golang-rest-api/repository"
 )
 
 type ProductService interface {
 	FindAll() ([]model.Product, error)
 }
 
-type service struct{}
-
-var (
-	repo repository.ProductRepository
-)
+type service struct{
+	repository repository.ProductRepository
+}
 
 
 func NewProductService(repository repository.ProductRepository) ProductService {
-	repo = repository
-	return &service{}
+	return &service{repository: repository}
 }
 
-func (*service) FindAll() ([]model.Product, error) {
-	return repo.FindAll()
+func (service *service) FindAll() ([]model.Product, error) {
+	return service.repository.FindAll()
 }
