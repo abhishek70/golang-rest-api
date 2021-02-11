@@ -13,3 +13,8 @@ go run .
 ```
 curl -v http://localhost:9090/products
 ```
+
+### Tests
+```
+go test -v ./tests/...
+```
