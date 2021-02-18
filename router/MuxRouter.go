@@ -32,7 +32,7 @@ func (muxRouter *MuxRouter) SERVE(port string) {
 
 	// Setting up the web server
 	s := &http.Server{
-		Addr: ":9090",
+		Addr: ":"+port,
 		Handler: muxDispatcher,
 		ReadHeaderTimeout: 1*time.Second,
 		WriteTimeout: 1*time.Second,

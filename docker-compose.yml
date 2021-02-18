@@ -4,10 +4,36 @@ services:
     container_name: product-service
     build: .
     ports:
-      - 8080:8080
-    restart: on-failure
+      - "8080:8080"
+    expose:
+      - "8080"
+    restart: always
+    depends_on:
+      - db
+    environment:
+      DB_USER: root
+      DB_PASS: root
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: product-service
     networks:
       - product-service
-
+  db:
+    image: mysql/mysql-server:5.7
+    container_name: product-db
+    networks:
+      - product-service
+    volumes:
+        - ./data/:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: product-service
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    expose:
+      - "3306"
+    ports:
+      - "3306:3306"
 networks:
   product-service:

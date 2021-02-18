@@ -1,4 +1,4 @@
-## Golang REST API (Development Mode)
+## Golang REST API
 
 ### Build
 ```
@@ -11,7 +11,7 @@ go run .
 
 ### Product Service
 ```
-curl -v http://localhost:9090/products
+curl -v http://localhost:8080/products
 ```
 
 ### Tests

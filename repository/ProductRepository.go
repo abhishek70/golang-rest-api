@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"github.com/abhishek70/golang-rest-api/database"
 	"github.com/abhishek70/golang-rest-api/model"
 	"log"
 )
@@ -26,14 +27,19 @@ func (repo *repo) FindAll() ([]model.Product, error)  {
 
 	repo.logger.Println("Fetching all products from database")
 
-	var products = []model.Product{{
-		Id:   1,
-		Sku:  "product sku 1",
-		Name: "product name 1",
-	}, {
-		Id:   2,
-		Sku:  "product sku 2",
-		Name: "product name 2",
-	}}
+	//var products = []model.Product{{
+	//	ID:   1,
+	//	Sku:  "product sku 1",
+	//	Name: "product name 1",
+	//}, {
+	//	ID:   2,
+	//	Sku:  "product sku 2",
+	//	Name: "product name 2",
+	//}}
+
+	var products []model.Product
+
+	database.DB.Find(&products)
+
 	return products, nil
 }

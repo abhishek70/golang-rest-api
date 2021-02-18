@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/abhishek70/golang-rest-api/controller"
+	"github.com/abhishek70/golang-rest-api/database"
 	"github.com/abhishek70/golang-rest-api/repository"
 	router "github.com/abhishek70/golang-rest-api/router"
 	"github.com/abhishek70/golang-rest-api/service"
@@ -24,7 +25,10 @@ var (
 
 func main() {
 
-	const PORT string = "9090"
+	const PORT string = "8080"
+
+	// Attempt to initialize and connect database
+	database.Initialize()
 
 	httpRouter.GET("/", func(response http.ResponseWriter, request *http.Request) {
 		logger.Println(response, "Up and running...")
